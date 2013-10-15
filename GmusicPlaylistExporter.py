@@ -16,7 +16,7 @@ for playlist in api.get_all_playlist_ids()['user']:
 
 while True:
 	chosen_number = int(raw_input('Choose a playlist to export (enter the number): '))
-	if chosen_number < i:
+	if chosen_number < i and chosen_number >= 0:
 		break
 	else:
 		print 'Error, try again'
@@ -38,8 +38,8 @@ for song in api.get_playlist_songs(chosen_id):
 songs.sort(key=lambda s: s.lower())
 
 f = open(os.path.join(os.path.dirname(__file__), playlist + '.txt'), "w")
-for out in songs:
- 	f.write(out.encode("utf-8") + "\n")
+for song in songs:
+ 	f.write(song.encode("utf-8") + "\n")
 
 api.logout()
 
